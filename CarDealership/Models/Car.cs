@@ -1,48 +1,31 @@
 using System;
 using System.Collections.Generic;
 
-namespace Dealership.Models
+namespace CarDealership.Models
 {
   public class Car
   {
     public string MakeModel { get; set; }
     public int Price { get; set; }
     public int Miles { get; set; }
+    private static List<Car> _instances = new List<Car>();
 
-    public Car(string makeModel,int price,int miles)
+    public Car (string makeModel,int price,int miles)
     {
       MakeModel = makeModel;
       Price = price;
       Miles = miles;
+      _instances.Add(this);
     }
 
-    public static string MakeSound(string sound)
+    public static List<Car> GetAll()
     {
-      return "Our cars sound like " + sound;
+      return _instances;
     }
 
-    public void SetPrice(int newPrice)
+    public static void ClearAll()
     {
-      Price = newPrice;
-    }
-
-    public string GetMakeModel()
-    {
-      return MakeModel;
-    }
-
-    public int GetPrice()
-    {
-      return Price;
-    }
-
-    public int GetMiles()
-    {
-      return Miles;
-    }
-    public bool WorthBuying(int maxPrice)
-    {
-      return (Price <= maxPrice);
+      _instances.Clear();
     }
   }
 }
